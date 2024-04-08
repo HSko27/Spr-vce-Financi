@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Výpočet DPH</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 py-12">
+<div class="max-w-md mx-auto bg-white rounded p-6 shadow-md">
+  <h2 class="text-xl font-semibold mb-4">Výpočet DPH</h2>
+  <label class="block mb-2" for="price">Cena bez DPH:</label>
+  <input type="number" id="price" min="0" step="0.01" class="w-full px-4 py-2 border rounded mb-4">
+  
+  <label class="block mb-2" for="vat">Sazba DPH (%):</label>
+  <select id="vat" class="w-full px-4 py-2 border rounded mb-4">
+    <option value="21">21%</option>
+    <option value="19">19%</option>
+    <option value="15">15%</option>
+    <option value="10">10%</option>
+  </select>
+  
+  <button onclick="calculateTotal()" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Spočítat celkovou cenu</button>
+  
+  <div id="result" class="mt-4"></div>
+</div>
+
+<script>
+  function calculateTotal() {
+    var price = parseFloat(document.getElementById('price').value);
+    var vatRate = parseFloat(document.getElementById('vat').value);
+    var vatAmount = price * (vatRate / 100);
+    var totalPrice = price + vatAmount;
+    var difference = totalPrice - price;
+    
+    document.getElementById('result').innerHTML = `
+      <p class="mb-2">Celková cena s DPH: ${totalPrice.toFixed(2)} Kč</p>
+      <p class="mb-2">DPH: ${vatAmount.toFixed(2)} Kč</p>
+      <p class="mb-2">Rozdíl oproti původní ceně: ${difference.toFixed(2)} Kč</p>
+    `;
+  }
+</script>
+</body>
+</html>

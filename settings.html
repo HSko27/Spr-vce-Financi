@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="">
+      <p id="passText"></p>
+      <p id="userText"></p>
+    </div>
+    <script>
+      const Pass = localStorage.getItem("Pass");
+      const User = localStorage.getItem("User");
+
+      var passText = document.getElementById("passText");
+      var userText = document.getElementById("userText");
+
+      passText.innerHTML = Pass;
+      userText.innerHTML = User;
+    </script>
+  </body>
+</html>

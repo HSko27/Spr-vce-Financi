@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sprava Financi</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="kontejner">
+      <h1>Sprava Osobnich Financi</h1>
+      <div id="shrnuti"></div>
+      <div id="transakce"></div>
+      <a href="settings.html
+      "><button class=" p-3 bg-gray-600 text-gray-200 my-5">Nastavení</button></a>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const transakce = [
+          { typ: "prijem", castka: 1000, kategorie: "Plat" },
+          { typ: "prijem", castka: 200, kategorie: "Freelance" },
+          { typ: "vydaj", castka: 300, kategorie: "Jidlo" },
+          { typ: "vydaj", castka: 50, kategorie: "Doprava" },
+        ];
+
+        const shrnutiElement = document.getElementById("shrnuti");
+        const celkovyPrijem = transakce
+          .filter((transakce) => transakce.typ === "prijem")
+          .reduce((sum, transakce) => sum + transakce.castka, 0);
+        const celkoveVydaje = transakce
+          .filter((transakce) => transakce.typ === "vydaj")
+          .reduce((sum, transakce) => sum + transakce.castka, 0);
+        shrnutiElement.innerHTML = `<p>Celkovy Prijem: ${celkovyPrijem} CZK</p>
+                                <p>Celkove Vydaje: ${celkoveVydaje} CZK</p>`;
+
+        const transakceElement = document.getElementById("transakce");
+        transakce.forEach((transakce) => {
+          const transakceDiv = document.createElement("div");
+          transakceDiv.classList.add("transakce");
+          transakceDiv.innerHTML = `<h3>${transakce.kategorie}</h3>
+                                    <p>Typ: ${
+                                      transakce.typ === "prijem"
+                                        ? "Prijem"
+                                        : "Vydaj"
+                                    }</p>
+                                    <p>Castka: ${transakce.castka} CZK</p>`;
+          transakceElement.appendChild(transakceDiv);
+        });
+      });
+    </script>
+  </body>
+</html>
